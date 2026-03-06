@@ -15,18 +15,18 @@ async function loadData() {
   const timeData = result.timeData || {};
 
   const list = document.getElementById("list");
-  const total = document.getElementById("total");
+  const totalBadge = document.getElementById("totalBadge");
   const clearBtn = document.getElementById("clear");
   list.innerHTML = "";
 
   const entries = Object.entries(timeData).sort((a, b) => b[1] - a[1]);
   const totalMs = entries.reduce((sum, [, time]) => sum + time, 0);
-  total.textContent = formatTime(totalMs);
+  totalBadge.textContent = formatTime(totalMs);
 
   if (entries.length === 0) {
     const empty = document.createElement("div");
     empty.className = "empty";
-    empty.textContent = "No browsing time tracked yet.";
+    empty.textContent = "Start browsing to track your time";
     list.appendChild(empty);
     clearBtn.disabled = true;
     return;
@@ -34,9 +34,11 @@ async function loadData() {
 
   clearBtn.disabled = false;
 
-  entries.forEach(([site, time]) => {
+  entries.forEach(([site, time], index) => {
     const row = document.createElement("div");
     row.className = "site-row";
+    row.style.animationDelay = `${index * 30}ms`;
+    row.style.animation = `slideIn 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards`;
 
     const siteEl = document.createElement("div");
     siteEl.className = "site-name";

@@ -6,17 +6,25 @@
   <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <div class="card">
-    <div class="header">
-      <h3 class="title">Site Time Tracker</h3>
-      <p class="subtitle">Your most visited sites in this browser</p>
-      <div class="summary">Total tracked: <strong id="total">0m 0s</strong></div>
-    </div>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="header-content">
+          <div class="title-section">
+            <h3 class="title">📊 Site Time Tracker</h3>
+            <p class="subtitle">Track your browsing patterns</p>
+          </div>
+          <div class="total-badge" id="totalBadge">0h 0m</div>
+        </div>
+      </div>
 
-    <div id="list"></div>
+      <div class="list-wrapper">
+        <div id="list"></div>
+      </div>
 
-    <div class="footer">
-      <button id="clear">Clear Data</button>
+      <div class="footer">
+        <button id="clear" class="btn-clear">🗑️ Clear All Data</button>
+      </div>
     </div>
   </div>
 
