@@ -1,0 +1,24 @@
+name: Build Chrome Extension
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Zip the extension
+        run: |
+          zip -r site-time-tracker.zip . -x "*.git*" ".github/*"
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: site-time-tracker.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
