@@ -9,16 +9,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Zip the extension
         run: |
           zip -r site-time-tracker.zip . -x "*.git*" ".github/*"
 
-      - name: Upload release asset
+      - name: Upload ZIP release asset
         uses: softprops/action-gh-release@v1
         with:
           files: site-time-tracker.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install CRX tool
+        run: npm install -g crx
+
+      - name: Create CRX
+        run: |
+          echo "${{ secrets.CHROME_EXTENSION_KEY }}" > key.pem
+          crx pack . -o site-time-tracker.crx -p key.pem
+
+      - name: Upload CRX release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: site-time-tracker.crx
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
