@@ -99,4 +99,4 @@ Made with ❤️ for better web browsing habits
     ## Install Site Time Tracker
 You can install the extension directly:
 
-[Download & Install]((https://github.com/Aarjal/Time_tracker/releases/download/v1.0.0/site-time-tracker.crx))
+[Download & Install](https://github.com/Aarjal/Time_tracker/releases/download/v1.0.0/site-time-tracker.crx)
