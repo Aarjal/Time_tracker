@@ -1,0 +1,31 @@
+name: Build Chrome Extension
+
+# Trigger workflow when code is pushed to main OR when a release is created
+on:
+  push:
+    branches: [main]  # change to master if your branch is master
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Zip the extension folder
+      - name: Zip the extension
+        run: |
+          cd site-time-tracker
+          zip -r ../site-time-tracker.zip . -x "*.git*" ".github/*"
+
+      # Step 3: Upload zip as a release asset
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: site-time-tracker.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
