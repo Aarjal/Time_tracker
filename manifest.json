@@ -1,9 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Site Time Tracker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Tracks time spent on each website",
-  "permissions": ["tabs", "storage"],
+  "permissions": [
+    "tabs",
+    "storage",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "host_permissions": ["https://flavortown.hackclub.com/*"],
   "background": {
     "service_worker": "background.js"
   },
@@ -19,5 +25,14 @@
       "32": "icons/icon32.png"
     },
     "default_popup": "popup.html"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "flavortown_header",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
   }
 }

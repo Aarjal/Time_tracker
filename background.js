@@ -1,20 +1,3 @@
-const FLAVORTOWN_PROJECT_ID = '15798';
-
-// Register extension with Flavortown on install
-chrome.runtime.onInstalled.addListener(() => {
-  fetch('https://flavortown.dev/api/extensions/verify', {
-    method: 'POST',
-    headers: {
-      [`X-Flavortown-Ext-${FLAVORTOWN_PROJECT_ID}`]: 'true',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ 
-      name: 'Site Time Tracker',
-      version: '1.0.2'
-    })
-  }).catch(err => console.log('Flavortown registration:', err));
-});
-
 let currentTab = null;
 let startTime = null;
 
